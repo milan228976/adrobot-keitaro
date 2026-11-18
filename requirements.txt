@@ -1,0 +1,8 @@
+fastapi>=0.115,<1
+uvicorn>=0.32,<1
+SQLAlchemy>=2.0,<3
+alembic>=1.14,<2
+httpx>=0.28,<1
+pydantic-settings>=2.7,<3
+python-dotenv>=1,<2
+pycountry>=24.6.1,<27

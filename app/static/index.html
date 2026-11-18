@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adrobot · Кампании Keitaro</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <strong>Adrobot</strong>
+      <span class="divider"></span>
+      <span class="muted">Keitaro</span>
+      <a href="/docs" class="api-link">OpenAPI ↗</a>
+    </div>
+  </header>
+  <main>
+    <h1>Кампании</h1>
+    <p class="subtitle">Создание кампаний и настройка распределения трафика</p>
+    <p id="notice" role="status" class="notice" hidden></p>
+    <div class="workspace">
+      <section class="panel" aria-labelledby="create-title">
+        <h2 id="create-title">Новая кампания</h2>
+        <form id="create" class="fields">
+          <label>Название<input name="name" placeholder="Например, AU · Тест" maxlength="140" required></label>
+          <div class="two-fields">
+            <label>Код страны<input name="country" placeholder="AU" pattern="[A-Za-z]{2}" maxlength="2" required></label>
+            <label>Оффер<select name="offer_id" id="new-offer" required></select></label>
+          </div>
+          <label>Домен<select name="domain_id" id="domain" required></select></label>
+          <div class="two-fields">
+            <label>Группа<select name="group_id" id="group" required></select></label>
+            <label>Источник<select name="traffic_source_id" id="source" required></select></label>
+          </div>
+          <div class="route-hint">
+            <span>Из выбранной страны → Google</span>
+            <span>Остальной трафик → оффер</span>
+          </div>
+          <button id="create-button" class="primary" disabled>Создать кампанию</button>
+        </form>
+      </section>
+      <section class="panel" aria-labelledby="edit-title">
+        <h2 id="edit-title">Редактор офферов</h2>
+        <label>Недавние кампании<select id="campaigns"></select></label>
+        <form id="open" class="inline separate">
+          <label>Или ID кампании<input name="id" type="number" min="1" required placeholder="Например, 12345"></label>
+          <button>Открыть</button>
+        </form>
+        <div id="campaign-detail" class="separate" hidden>
+          <div class="section-header">
+            <h3 id="campaign-name"></h3>
+            <span id="campaign-state" class="tag"></span>
+          </div>
+          <label>Поток<select id="streams"></select></label>
+          <p class="muted" id="no-stream" hidden>В кампании нет потока, в котором можно редактировать офферы.</p>
+        </div>
+        <div id="editor" class="separate" hidden>
+          <div class="section-header">
+            <h3>Офферы потока</h3>
+            <span id="draft-state" class="tag"></span>
+          </div>
+          <div class="scroll">
+            <table>
+              <caption id="stats-caption">Статистика за 7 дней · Europe/Moscow</caption>
+              <thead><tr><th scope="col">Оффер</th><th scope="col">Доля</th><th scope="col">Клики</th><th scope="col">Конверсии</th><th scope="col">Действия</th></tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+          <form id="add" class="inline">
+            <label>Добавить оффер
+              <input name="offer" id="offer-search" list="offer-options" autocomplete="off" placeholder="ID или название" required>
+              <datalist id="offer-options"></datalist>
+            </label>
+            <button>Добавить</button>
+          </form>
+          <div class="actions">
+            <button id="refresh">Обновить</button>
+            <button id="discard">Сбросить черновик</button>
+            <button id="apply" class="primary">Отправить в Keitaro</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <dialog id="pin-dialog">
+    <form id="pin-form" class="fields">
+      <h3>Закрепить долю</h3>
+      <label>Доля, %<input name="share" type="number" min="0" max="100" step="1" required></label>
+      <div class="inline">
+        <button type="button" id="close-pin">Отмена</button>
+        <button class="primary">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
