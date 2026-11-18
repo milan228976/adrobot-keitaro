@@ -54,7 +54,7 @@ app = FastAPI(title="Adrobot · Keitaro", lifespan=lifespan)
 @app.exception_handler(TrackerError)
 async def tracker_error(request: Request, error: TrackerError):
     if isinstance(error, IncompleteCampaign):
-        message = f"Создание кампании #{error.campaign_id} прервалось. Проверьте её в Keitaro."
+        message = f"Создание компании #{error.campaign_id} прервалось. Проверьте её в Keitaro."
         status = 502
     elif error.status == 404:
         message, status = "Объект не найден в Keitaro.", 404
@@ -327,6 +327,16 @@ def offer_stats(stream_id: PositiveInt, tracker: Keitaro):
 @app.get("/", include_in_schema=False)
 def home():
     return FileResponse(STATIC / "index.html")
+
+
+@app.get("/styles.css", include_in_schema=False)
+def stylesheet():
+    return FileResponse(STATIC / "styles.css", media_type="text/css")
+
+
+@app.get("/app.js", include_in_schema=False)
+def javascript():
+    return FileResponse(STATIC / "app.js", media_type="text/javascript")
 
 
 app.mount("/assets", StaticFiles(directory=STATIC), name="assets")

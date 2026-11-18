@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adrobot · Кампании Keitaro</title>
-  <link rel="stylesheet" href="/assets/styles.css">
-  <script src="/assets/app.js" defer></script>
+  <title>Adrobot · Компании Keitaro</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <header class="masthead">
@@ -18,12 +18,12 @@
     </div>
   </header>
   <main>
-    <h1>Кампании</h1>
-    <p class="subtitle">Создание кампаний и настройка распределения трафика</p>
+    <h1>Компании</h1>
+    <p class="subtitle">Управляйте маршрутами трафика и распределением офферов.</p>
     <p id="notice" role="status" class="notice" hidden></p>
     <div class="workspace">
       <section class="panel" aria-labelledby="create-title">
-        <h2 id="create-title">Новая кампания</h2>
+        <h2 id="create-title">Новая компания</h2>
         <form id="create" class="fields">
           <label>Название<input name="name" placeholder="Например, AU · Тест" maxlength="140" required></label>
           <div class="two-fields">
@@ -39,14 +39,14 @@
             <span>Из выбранной страны → Google</span>
             <span>Остальной трафик → оффер</span>
           </div>
-          <button id="create-button" class="primary" disabled>Создать кампанию</button>
+          <button id="create-button" class="primary" disabled>Создать компанию</button>
         </form>
       </section>
       <section class="panel" aria-labelledby="edit-title">
         <h2 id="edit-title">Редактор офферов</h2>
-        <label>Недавние кампании<select id="campaigns"></select></label>
+        <label>Недавние компании<select id="campaigns"></select></label>
         <form id="open" class="inline separate">
-          <label>Или ID кампании<input name="id" type="number" min="1" required placeholder="Например, 12345"></label>
+          <label>Или ID компании<input name="id" type="number" min="1" required placeholder="Например, 12345"></label>
           <button>Открыть</button>
         </form>
         <div id="campaign-detail" class="separate" hidden>
@@ -55,7 +55,7 @@
             <span id="campaign-state" class="tag"></span>
           </div>
           <label>Поток<select id="streams"></select></label>
-          <p class="muted" id="no-stream" hidden>В кампании нет потока, в котором можно редактировать офферы.</p>
+          <p class="muted" id="no-stream" hidden>В компании нет потока, в котором можно редактировать офферы.</p>
         </div>
         <div id="editor" class="separate" hidden>
           <div class="section-header">

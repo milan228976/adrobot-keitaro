@@ -44,7 +44,7 @@ function populate(select, label, rows) {
 
 async function loadCampaigns() {
   const campaigns = await api("campaigns");
-  populate(el("campaigns"), "Выбрать кампанию", campaigns);
+  populate(el("campaigns"), "Выбрать компанию", campaigns);
 }
 
 async function loadCatalog() {
@@ -262,18 +262,22 @@ el("create").onsubmit = async (event) => {
     const campaign = await api("campaigns", "POST", fields);
     form.reset();
     await openCampaign(campaign.id);
-    notice("Кампания #" + campaign.id + " создана.");
+    notice("Компания #" + campaign.id + " создана.");
     loadCampaigns().catch((error) => notice(error.message, true));
   } catch (error) {
     notice(error.message, true);
   } finally {
     button.disabled = false;
-    button.textContent = "Создать кампанию";
+    button.textContent = "Создать компанию";
   }
 };
 
-Promise.allSettled([loadCampaigns(), loadCatalog()]).then((results) => {
-  const errors = results.filter((result) => result.status === "rejected");
-  if (errors.length) notice(errors.map((result) => result.reason.message).join(" "), true);
-  render();
-});
+if (location.protocol === "file:") {
+  notice("Для работы с Keitaro запустите FastAPI по инструкции README и откройте http://127.0.0.1:8000/.");
+} else {
+  Promise.allSettled([loadCampaigns(), loadCatalog()]).then((results) => {
+    const errors = results.filter((result) => result.status === "rejected");
+    if (errors.length) notice(errors.map((result) => result.reason.message).join(" "), true);
+    render();
+  });
+}
